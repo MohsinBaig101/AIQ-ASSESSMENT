@@ -3,15 +3,16 @@ import {
     Get,
     HttpCode,
     UseAfter,
-    QueryParams,
     Res,
     Controller
 } from 'routing-controllers';
 import * as path from 'path';
 import express from 'express';
+import { ClassValidator } from '../decorators/Validator';
 import { Container } from 'typedi';
 import { ErrorHandlerMiddleware } from '../customMiddleware/ErrorHandlerMiddleware';
 import { ImagesService } from '../services/ImagesService';
+import { ImageQuery } from '../DTOS/ImagesQueryDTO';
 
 @Controller('/images')
 @UseAfter(ErrorHandlerMiddleware)
@@ -24,7 +25,7 @@ export class ImagesController {
     @Get('/')
     @HttpCode(200)
     async getImages(
-        @QueryParams() query: any
+        @ClassValidator(ImageQuery, 'query') query: ImageQuery,
     ): Promise<any[]> {
         return this.imageService.getImages(query.depthMin, query.depthMax);
     }
