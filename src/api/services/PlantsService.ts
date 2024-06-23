@@ -103,7 +103,7 @@ export class PlantsService {
     const rowData: IPlant = {
       plantName: _.get(row.getCell(env.constants.plantNameColumnIndex), 'value'),
       state: _.get(row.getCell(env.constants.plantStateColumnIndex), 'value'),
-      annualNetGeneration: _.get(row.getCell(env.constants.plantNetGenColumnIndex), 'value'),
+      annualNetGeneration: Math.abs(_.get(row.getCell(env.constants.plantNetGenColumnIndex), 'value', 0)),
       latitude: _.get(row.getCell(env.constants.plantLatitudeColumnIndex), 'value'),
       longitude: _.get(row.getCell(env.constants.plantLongitudeColumnIndex), 'value'),
     };
@@ -134,15 +134,15 @@ export class PlantsService {
   ) {
     switch (filterBy) {
       case "plants":
-        return this.getPlantsList(topPlants);
+        return await this.getPlantsList(topPlants);
       case "stateTotals":
-        return this.calculateStateTotals();
+        return await this.calculateStateTotals();
       case "state":
-        return this.filterPlantsByState(state);
+        return await this.filterPlantsByState(state);
       case "plantPercentage":
-        return this.calculatePlantPercentages();
+        return await this.calculatePlantPercentages();
       default:
-        return this.getPlantsList(20); // Default to fetching 20 plants if filterBy is unrecognized
+        return await this.getPlantsList(20); // Default to fetching 20 plants if filterBy is unrecognized
     }
   }
 

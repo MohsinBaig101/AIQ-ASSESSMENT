@@ -5,7 +5,6 @@ export const ignoreNodes = [
     "sheetViews",
     "sheetFormatPr",
     "cols",
-    "sheetData",
     "autoFilter",
     "mergeCells",
     "rowBreaks",

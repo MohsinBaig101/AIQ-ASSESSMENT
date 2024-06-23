@@ -1,7 +1,7 @@
 import {
     IsNotEmpty,
     ValidateIf,
-    IsEnum,
+    IsEnum
 } from 'class-validator';
 enum FilterBy {
     STATE = 'state',
@@ -13,7 +13,7 @@ export class PlantsQuery {
     @IsEnum(FilterBy, { message: 'FilterBy must be one of the following values: state, plants, stateTotals, plantPercentage' })
     public filterBy: FilterBy;
 
-    @ValidateIf(o => o.filterBy === 'plants')
+    @ValidateIf(o => o?.filterBy === 'plants')
     @IsNotEmpty()
     public topPlants: number;
 

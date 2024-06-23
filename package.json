@@ -25,8 +25,6 @@
     "csv-parse": "^5.5.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "glob": "^10.4.2",
-    "globby": "^14.0.1",
     "http-status-codes": "^2.3.0",
     "lodash": "^4.17.21",
     "multer": "^1.4.5-lts.1",
@@ -37,8 +35,7 @@
     "sharp": "^0.33.4",
     "ts-node": "^10.9.2",
     "typedi": "^0.10.0",
-    "typeorm": "^0.3.20",
-    "xlsx": "^0.18.5"
+    "typeorm": "^0.3.20"
   },
   "jest": {
     "globals": {
@@ -64,9 +61,12 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
+    "@types/mock-req-res": "^1.1.6",
     "@types/multer": "^1.4.11",
     "@types/sinon": "^17.0.3",
     "jest": "^29.7.0",
+    "mock-req-res": "^1.2.1",
+    "node-mocks-http": "^1.15.0",
     "sinon": "^18.0.0",
     "ts-jest": "^29.1.5"
   }
