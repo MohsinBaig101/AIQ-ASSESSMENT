@@ -39,7 +39,8 @@ Run the application on Docker
 docker-compose build && docker-compose up -d
 ```
 
-#### I have added the Postman collection to the repository. Please import it into Postman.
+#### I have added the Postman collection to the repository. Please import it into Postman. 
+#### I have used the egrid2022_data file for challenge 1.
 
 
 
