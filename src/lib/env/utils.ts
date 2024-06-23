@@ -47,3 +47,18 @@ export function getOsPath(key: string): string {
 export function getOsPaths(key: string): string[] {
     return getPaths(getOsEnvArray(key));
 }
+
+export const getEnvFile = <T>(depEnv: string, APP_ENV: T): string => {
+    if (process.env.NODE_ENV === "production") {
+        return ".env.test";
+    }
+
+    if (depEnv) {
+        const envFile = APP_ENV[depEnv.toUpperCase()];
+        if (envFile) {
+            return `aiq-v1-${depEnv.toLowerCase()}.env`;
+        }
+    }
+
+    return ".env";
+};

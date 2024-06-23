@@ -1,10 +1,10 @@
 import bunyan from 'bunyan';
 
-export interface LoggerInterface {
-    trace(msg: string, additional?: any): void;
-    debug(msg: string, additional?: any): void;
-    info(msg: string, additional?: any): void;
-    warn(msg: string, additional?: any): void;
-    error(msg: string, additional?: any): void;
+export interface LoggerInterface<T> {
+    trace(msg: string, additional?: T): void;
+    debug(msg: string, additional?: T): void;
+    info(msg: string, additional?: T): void;
+    warn(msg: string, additional?: T): void;
+    error(msg: string, additional?: T): void;
     child(msg: unknown): bunyan;
 }

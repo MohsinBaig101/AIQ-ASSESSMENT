@@ -1,18 +1,15 @@
 import {
-    Param,
     Get,
     HttpCode,
     UseAfter,
-    Res,
     Controller
 } from 'routing-controllers';
-import * as path from 'path';
-import express from 'express';
 import { ClassValidator } from '../decorators/Validator';
 import { Container } from 'typedi';
 import { ErrorHandlerMiddleware } from '../customMiddleware/ErrorHandlerMiddleware';
 import { ImagesService } from '../services/ImagesService';
 import { ImageQuery } from '../DTOS/ImagesQueryDTO';
+import { Image } from "../entities/Image.entity";
 
 @Controller('/images')
 @UseAfter(ErrorHandlerMiddleware)
@@ -22,35 +19,22 @@ export class ImagesController {
         this.imageService = Container.get(ImagesService);
     }
 
+    /**
+   * Controller method to handle GET requests for fetching images.
+   *
+   * This method is mapped to the root URL ("/") of this controller.
+   * It validates the query parameters using the ImageQuery class.
+   * If the query parameters are valid, it fetches images based on the specified depth range.
+   *
+   * @returns {Promise<Image[]>} - A promise that resolves to an array of Image objects.
+   */
     @Get('/')
     @HttpCode(200)
     async getImages(
         @ClassValidator(ImageQuery, 'query') query: ImageQuery,
-    ): Promise<any[]> {
+    ): Promise<Image[]> {
+        // Fetch images using the imageService with the provided depth range.
         return this.imageService.getImages(query.depthMin, query.depthMax);
-    }
-
-    @Get('/:fileName')
-    @HttpCode(200)
-    async getImageByFileName(
-        @Param('fileName') fileName: any,
-        @Res() res: express.Response
-    ): Promise<any> {
-        const options = {
-            root: path.join(__dirname, '../../../public/challenge2/'),
-            //   dotfiles: 'deny',
-            headers: {
-                'x-timestamp': Date.now(),
-                'x-sent': true,
-            },
-        };
-        res.sendFile(fileName, options, (err) => {
-            if (err) {
-                //   next(err)
-            } else {
-                console.log('Sent:', fileName);
-            }
-        });
     }
 
 }

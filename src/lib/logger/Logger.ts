@@ -31,10 +31,7 @@ export class Logger {
     public debug(msg: string, additional?: unknown): void {
         this._log(msg, additional, 'debug');
     }
-    public log(args: any): void {
-        const { msg, ...additional } = args;
-        this._log(msg, additional, 'info');
-    }
+    
     public infoDebug(msg: string, additional?: unknown): void {
         if (env.log.debugMode) {
             this._log(msg, additional, 'info');
@@ -47,12 +44,12 @@ export class Logger {
         }
     }
 
-    public error(err: any, additional?: unknown): void {
+    public error(err: Error, additional?: unknown): void {
         const merged = this._merge(err, additional);
         this._log(merged.msg || merged.message, merged, 'error');
     }
 
-    public fatal(err: any, additional?: unknown): void {
+    public fatal(err: Error, additional?: unknown): void {
         const merged = this._merge(err, additional);
         this._log(merged.msg || merged.message, merged, 'fatal');
     }
@@ -77,7 +74,7 @@ export class Logger {
     private _log(msg: string, additional?: unknown, level: string = 'info'): void {
         this.logger[level](additional, msg);
     }
-    private _merge(error: Error | { message: string, additional?: any }, additional): any {
+    private _merge(error: Error | { message: string, additional?}, additional): { err?: { message: string }, msg?: string, message?: string } {
         let err: { message: string } = { message: '' };
         let mergedObj = {};
         let msg = '';

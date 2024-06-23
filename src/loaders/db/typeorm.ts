@@ -1,9 +1,10 @@
 import { DataSource } from 'typeorm';
-// import { env } from '../../../env';
-import { Image } from '../../api/entities/Image.entity'
-import { Plant } from '../../api/entities/Plant.entity'
+import { Image, Plant } from '../../api/entities'
+import { Logger } from "../../lib/logger";
 
-export const AppDataSource = new DataSource({
+
+const log = new Logger(__filename).child({ serviceId: "MONGO_LOADER" })
+export const AppDataSource: DataSource = new DataSource({
     type: process.env.DB_TYPE,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -13,16 +14,19 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     logging: false,
     entities: [Image, Plant],
-    // 'entities': ['dist/entities/*.js'],
-    // 'entities': [env.constants.typeormEntities],
 } as any);
 
 export async function typeOrmLoader() {
     try {
+        /**
+         * Initialize the DB connection
+         */
         await AppDataSource.initialize();
-        // in real time project, we used logger
-        console.log('DB initialized');
+        /**
+         * DB Initialized
+         */
+        log.info('DB_INITIALIZED');
     } catch (err) {
-        console.log(err);
+        log.error({ err }, 'FAILED_TO_CONNECT_TO_DB');
     }
 }

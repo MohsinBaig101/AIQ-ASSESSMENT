@@ -9,10 +9,10 @@ export function IsBiggerThan(property: string, validationOptions?: ValidationOpt
       constraints: [property],
       options: validationOptions,
       validator: {
-        validate(value: any, args: ValidationArguments) {
+        validate(value: number | string, args: ValidationArguments) {
           const [relatedPropertyName] = args.constraints;
-          const relatedValue = (args.object as any)[relatedPropertyName];
-          return typeof value === 'number' && typeof relatedValue === 'number' && value > relatedValue;
+          const relatedValue = Number((args.object)[relatedPropertyName]);
+          return typeof Number(value) === 'number' && typeof relatedValue === 'number' && Number(value) > relatedValue;
         },
       },
     });

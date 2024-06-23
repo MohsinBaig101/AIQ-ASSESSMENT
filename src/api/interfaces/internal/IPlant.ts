@@ -1,7 +1,7 @@
 export interface IPlant {
     plantName: string;
     state: string;
-    annualNetGeneration: string;
+    annualNetGeneration: number;
     latitude: string;
     longitude: string;
 }

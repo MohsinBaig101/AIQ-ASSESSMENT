@@ -10,7 +10,7 @@
     "docker:start": "cross-env APP_ENV=sit NODE_ENV=sit node dist/app.js",
     "local": "cross-env APP_ENV=sit NODE_ENV=sit node dist/app.js",
     "lintfix": "npx tslint --project ./ --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "author": "Mohsin Nawaz Baig",
   "license": "ISC",
@@ -25,6 +25,8 @@
     "csv-parse": "^5.5.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "glob": "^10.4.2",
+    "globby": "^14.0.1",
     "http-status-codes": "^2.3.0",
     "lodash": "^4.17.21",
     "multer": "^1.4.5-lts.1",
@@ -38,11 +40,34 @@
     "typeorm": "^0.3.20",
     "xlsx": "^0.18.5"
   },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
+    "testEnvironment": "node"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/bunyan": "^1.8.6",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
-    "@types/multer": "^1.4.11"
+    "@types/jest": "^29.5.12",
+    "@types/multer": "^1.4.11",
+    "@types/sinon": "^17.0.3",
+    "jest": "^29.7.0",
+    "sinon": "^18.0.0",
+    "ts-jest": "^29.1.5"
   }
 }

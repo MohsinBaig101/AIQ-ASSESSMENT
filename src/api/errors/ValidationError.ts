@@ -3,8 +3,8 @@ import { errorMessages } from '../contants/errorMessages';
 
 export class ValidationError extends Error {
     public type: string;
-    public code: any;
-    public validationError: any;
+    public code: unknown;
+    public validationError: Error;
     private _field = '';
     private _message = '';
 

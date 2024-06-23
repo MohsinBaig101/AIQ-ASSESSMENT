@@ -16,7 +16,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
         this.log = (new Logger(__filename)).child({ serviceId: 'ERROR_MIDDLEWARE' });
     }
 
-    public async error(error: any, request: express.Request, response: express.Response, next: express.NextFunction): Promise<any> {
+    public async error(error: Error | CustomError | ValidationError, request: express.Request, response: express.Response, next: express.NextFunction): Promise<void> {
         let errorDetails: unknown;
         let errorStatus: number;
         const logger = this.log.child({
@@ -24,7 +24,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
         });
         logger.error(error, 'API_ERROR');
         if (error instanceof CustomError) {
-            const { type, code, message } = error;
+            const { type, code, message }: { type: string, code: string, message: string } = error;
             logger.info('ERROR_INSTANCE_OF_CUSTOM_ERROR');
             errorDetails = formErrorResponseObject(type, code, message);
             errorStatus = HTTP_STATUS.BAD_REQUEST;

@@ -3,7 +3,7 @@ import { errorMessages } from '../contants/errorMessages';
 
 export class CustomError extends Error {
     public type: string;
-    public code: any;
+    public code: string;
     private _field = '';
     private _message = '';
 
