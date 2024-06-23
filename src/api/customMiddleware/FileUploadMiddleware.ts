@@ -20,7 +20,7 @@ export const fileUploadMiddleware = {
             cb(undefined, Date.now() + path.extname(file.originalname));
         },
     }),
-    fileFilter: (req: express.Request, file: { mimetype: string }, cb: Function) => {
+    fileFilter: (req: express.Request, file: Express.Multer.File, cb: Function) => {
         // can add the validation like: fileType, size, etc...
         const allowedMimeTypes = [
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

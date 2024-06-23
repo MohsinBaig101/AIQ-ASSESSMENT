@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "4463761a-c9d3-44f4-8bf6-bb6e5e8dc8a8",
+		"name": "AIQ-ASSESSMENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12723826"
+	},
+	"item": [
+		{
+			"name": "egrid-challenge-1",
+			"item": [
+				{
+					"name": "egrid-file-upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mohsi/Downloads/egrid2022_data (1).xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/plants/upload/file",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"plants",
+								"upload",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-plants",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mohsi/Downloads/egrid2022_data (1).xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/plants?filterBy=plantPercentage",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"plants"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "NY",
+									"disabled": true
+								},
+								{
+									"key": "filterBy",
+									"value": "plantPercentage"
+								},
+								{
+									"key": "topPlants",
+									"value": "100",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "csv-challenge-2",
+			"item": [
+				{
+					"name": "get-images",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mohsi/Downloads/egrid2022_data (1).xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/images?depthMax=9001",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"images"
+							],
+							"query": [
+								{
+									"key": "depthMin",
+									"value": "90009",
+									"disabled": true
+								},
+								{
+									"key": "depthMax",
+									"value": "9001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "csv-upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mohsi/Downloads/AIQ - Backend Engineer Assignment - Data  (2).csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/v1/upload/file",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"upload",
+								"file"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "health-check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/health",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

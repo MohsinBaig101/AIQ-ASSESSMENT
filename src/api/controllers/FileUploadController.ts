@@ -8,6 +8,7 @@ import {
 } from 'routing-controllers';
 import { Container } from 'typedi';
 import * as express from 'express';
+import {CustomError} from '../errors/CustomError';
 import { fileUploadMiddleware } from '../customMiddleware/FileUploadMiddleware';
 import { ErrorHandlerMiddleware } from '../customMiddleware/ErrorHandlerMiddleware';
 import { ImagesService } from '../services/ImagesService';
@@ -33,9 +34,12 @@ export class FileUploadController {
   @Post('/file')
   @HttpCode(200)
   async uploadFile(
-    @UploadedFile('file', { options: fileUploadMiddleware }) file: Express.Multer.File,
+    @UploadedFile('file', { options: fileUploadMiddleware, required: false }) file: Express.Multer.File,
     @Res() response: express.Response
   ) {
+    if(!file){
+      throw new CustomError('FILE_NOT_PROVIDED')
+    }
     // Handle the uploaded file by parsing and processing the image CSV using the imageService.
     await this.imageService.parseImageCSVAndProcess(file);
 

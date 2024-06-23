@@ -5,6 +5,7 @@ import { fileUploadMiddleware } from '../customMiddleware/FileUploadMiddleware';
 import { ErrorHandlerMiddleware } from '../customMiddleware/ErrorHandlerMiddleware';
 import { PlantsService } from '../services/PlantsService';
 import { ClassValidator } from '../decorators/Validator';
+import { CustomError } from '../errors/CustomError';
 import { PlantsQuery } from '../DTOS/PlantsQueryDTO';
 
 @JsonController('/plants')
@@ -32,6 +33,9 @@ export class PlantsController {
     @UploadedFile('file', { options: fileUploadMiddleware }) file: Express.Multer.File,
     @Res() response: express.Response
   ) {
+    if (!file) {
+      throw new CustomError('FILE_NOT_PROVIDED')
+    }
     // Handle the uploaded file using the plantsService.
     await this.plantsService.handleExcelFile(file);
 
